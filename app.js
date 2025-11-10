@@ -20,7 +20,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.get("/", (_, res) => {
-  res.render("index", { messages: messages });
+  res.render("index", { title: "Mini Message Board", messages: messages });
 });
 
 const PORT = 3000;
