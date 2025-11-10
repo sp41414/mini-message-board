@@ -1,4 +1,5 @@
-const { express, Router } = require("express");
+const express = require("express");
+const { Router } = require("express") // i have no idea how to make this a one-liner
 const path = require("path");
 
 const app = express();
@@ -34,11 +35,15 @@ app.set("view engine", "ejs");
 app.use("/", pageRouter);
 
 pageRouter.get("/", (_, res) => {
-  res.render("index", { title: "Mini Message Board", messages: messages });
+  res.render("index", {
+    title: "Mini Message Board",
+    messages: messages,
+    links: links,
+  });
 });
 
 pageRouter.get("/new", (_, res) => {
-  res.render("form");
+  res.render("form", { title: "Mini Message Board", links: links });
 });
 
 const PORT = 3000;
