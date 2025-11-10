@@ -1,5 +1,5 @@
 const express = require("express");
-const { Router } = require("express") // i have no idea how to make this a one-liner
+const { Router } = require("express"); // i have no idea how to make this a one-liner
 const path = require("path");
 
 const app = express();
@@ -11,13 +11,13 @@ const messages = [
     text: "Hi there!",
     user: "Amando",
     added: new Date(),
-    id: crypto.randomUUID()
+    id: crypto.randomUUID(),
   },
   {
     text: "Hello World!",
     user: "Charles",
     added: new Date(),
-    id: crypto.randomUUID()
+    id: crypto.randomUUID(),
   },
 ];
 
@@ -38,7 +38,11 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // parse form data into req.body
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }));
+// css
+const assets = path.join(__dirname, "public");
+app.use(express.static(assets));
+
 // this HAS to come after or it breaks!
 app.use("/", pageRouter);
 
@@ -59,8 +63,12 @@ pageRouter.get("/details/:id", (req, res) => {
     res.status(500);
     return;
   }
-  res.render("details", { title: "Mini Message Board", message: message, links: links })
-})
+  res.render("details", {
+    title: "Mini Message Board",
+    message: message,
+    links: links,
+  });
+});
 
 // form page
 pageRouter.get("/new", (_, res) => {
@@ -69,9 +77,14 @@ pageRouter.get("/new", (_, res) => {
 
 // submit handler
 pageRouter.post("/new", (req, res) => {
-  messages.push({text: req.body.message, user: req.body.username, added: new Date(), id: crypto.randomUUID() })
-  res.redirect("/")
-})
+  messages.push({
+    text: req.body.message,
+    user: req.body.username,
+    added: new Date(),
+    id: crypto.randomUUID(),
+  });
+  res.redirect("/");
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {

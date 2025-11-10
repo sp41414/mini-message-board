@@ -1,5 +1,9 @@
-<nav>
-    <% links.forEach((link) => { %>
-        <a href="<%= link.href %>"><span><%= link.text %></span></a>
-    <% }) %>
-</nav>
+<head>
+  <!--probably not needed, just in case...?-->
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<div class="links">
+  <% links.forEach((link) => { %>
+  <a href="<%= link.href %>"><span><%= link.text %></span></a>
+  <% }) %>
+</div>
