@@ -1,4 +1,11 @@
 <body>
     <h1><%= title %></h1>
     <%- include('navbar', {links: links}) %>
+    <form method="POST" action="/new">
+        <label for="username">Username</label>
+        <input type="text" placeholder="Your username" name="username">
+        <label for="message">Message</label>
+        <textarea name="message" placeholder="Your message"></textarea>
+        <button type="submit">Submit</button>
+    </form>
 </body>

@@ -3,8 +3,9 @@ const { Router } = require("express") // i have no idea how to make this a one-l
 const path = require("path");
 
 const app = express();
-const pageRouter = Router();
+const pageRouter = Router(); // i just wanted to use router to get some practice idk
 
+// fake database
 const messages = [
   {
     text: "Hi there!",
@@ -18,6 +19,7 @@ const messages = [
   },
 ];
 
+// for navbar component
 const links = [
   {
     href: "/",
@@ -29,11 +31,16 @@ const links = [
   },
 ];
 
+// code to use ejs from views dir
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// parse form data into req.body
+app.use(express.urlencoded({extended: true}))
+// this HAS to come after or it breaks!
 app.use("/", pageRouter);
 
+// homepage
 pageRouter.get("/", (_, res) => {
   res.render("index", {
     title: "Mini Message Board",
@@ -42,9 +49,16 @@ pageRouter.get("/", (_, res) => {
   });
 });
 
+// form page
 pageRouter.get("/new", (_, res) => {
   res.render("form", { title: "Mini Message Board", links: links });
 });
+
+// submit handler
+pageRouter.post("/new", (req, res) => {
+  messages.push({text: req.body.message, user: req.body.username, added: new Date()})
+  res.redirect("/")
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
