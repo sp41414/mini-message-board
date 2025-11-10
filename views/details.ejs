@@ -1,0 +1,10 @@
+<body>
+    <h1><%= title %></h1>
+    <nav>
+        <%- include('navbar', {links: links}) %>
+    </nav>
+    <h2><%= message.user %></h2>
+    <p>Created at <%= message.added %></p>
+    <p>ID <%= message.id %></p>
+    <p><%= message.text %></p>
+</body>

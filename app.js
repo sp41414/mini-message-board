@@ -11,11 +11,13 @@ const messages = [
     text: "Hi there!",
     user: "Amando",
     added: new Date(),
+    id: crypto.randomUUID()
   },
   {
     text: "Hello World!",
     user: "Charles",
     added: new Date(),
+    id: crypto.randomUUID()
   },
 ];
 
@@ -49,6 +51,17 @@ pageRouter.get("/", (_, res) => {
   });
 });
 
+// details page
+pageRouter.get("/details/:id", (req, res) => {
+  const id = req.params.id;
+  const message = messages.find((message) => message.id === id);
+  if (!message) {
+    res.status(500);
+    return;
+  }
+  res.render("details", { title: "Mini Message Board", message: message, links: links })
+})
+
 // form page
 pageRouter.get("/new", (_, res) => {
   res.render("form", { title: "Mini Message Board", links: links });
@@ -56,7 +69,7 @@ pageRouter.get("/new", (_, res) => {
 
 // submit handler
 pageRouter.post("/new", (req, res) => {
-  messages.push({text: req.body.message, user: req.body.username, added: new Date()})
+  messages.push({text: req.body.message, user: req.body.username, added: new Date(), id: crypto.randomUUID() })
   res.redirect("/")
 })
 

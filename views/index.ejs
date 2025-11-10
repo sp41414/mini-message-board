@@ -7,6 +7,7 @@
       <h2><%= message.user %></h2>
       <p>Created at <%= message.added %></p>
       <p><%= message.text %></p>
+      <button><a href="/details/<%= message.id %>">Open</a></button>
     </li>
     <% }) %>
   </ul>
