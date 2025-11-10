@@ -1,7 +1,8 @@
-const express = require("express");
+const { express, Router } = require("express");
 const path = require("path");
 
 const app = express();
+const pageRouter = Router();
 
 const messages = [
   {
@@ -16,11 +17,28 @@ const messages = [
   },
 ];
 
+const links = [
+  {
+    href: "/",
+    text: "Home",
+  },
+  {
+    href: "/new",
+    text: "New Message",
+  },
+];
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.get("/", (_, res) => {
+app.use("/", pageRouter);
+
+pageRouter.get("/", (_, res) => {
   res.render("index", { title: "Mini Message Board", messages: messages });
+});
+
+pageRouter.get("/new", (_, res) => {
+  res.render("form");
 });
 
 const PORT = 3000;
