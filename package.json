@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch ./app.js"
+    "dev": "node --watch ./app.js",
+    "db": "node ./db/populatedb.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-validator": "^7.3.0",
+    "pg": "^8.16.3"
   }
 }

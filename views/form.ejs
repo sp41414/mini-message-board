@@ -8,11 +8,12 @@
     <h1 class="title"><%= title %></h1>
     <%- include('navbar', {links: links}) %>
   </nav>
+  <%- include('errors') %>
   <form method="POST" action="/new">
     <label for="username">Username</label>
-    <input type="text" placeholder="Your username" name="username" />
+    <input type="text" placeholder="Your username" name="username" required />
     <label for="message">Message</label>
-    <textarea name="message" placeholder="Your message"></textarea>
+    <textarea name="message" placeholder="Your message" required></textarea>
     <button type="submit">Submit</button>
   </form>
 </body>
